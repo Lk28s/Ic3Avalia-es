@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ic3Avaliações</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>ic3Avaliações</h1>
+    <p>Adicione produto → `products/Nome.ics` → aparece automático!</p>
+
+    <div id="products"></div>
+
+    <div id="app" style="display:none;">
+      <h2 id="name"></h2>
+      <div id="stars" class="stars"></div>
+      <p id="avg"></p>
+
+      <select id="rating">
+        <option value="">★ Escolha</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+
+      <input type="text" id="author" placeholder="Seu nome" />
+      <textarea id="comment" placeholder="Comentário"></textarea>
+      <button onclick="save()">ENVIAR</button>
+
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
