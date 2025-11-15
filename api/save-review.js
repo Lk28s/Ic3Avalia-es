@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     ? { product: req.query.product }
     : await req.json();
 
-  const file = `ice/${product}/reviews.json`;
+  const file = `ice/products/${product}/reviews.json`;  // ← PASTA CORRETA
 
   if (req.method === 'GET') {
     try {
