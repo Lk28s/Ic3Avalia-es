@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
-  const prefix = 'ice/';
+  const prefix = 'ice/products/';  // ← PREFIXO CORRETO
 
   try {
     const list = await fetch(`https://blob.vercel-storage.com/?prefix=${prefix}`, {
@@ -8,16 +8,24 @@ export default async function handler(req, res) {
     });
     const text = await list.text();
 
-    const folders = new Set();
-    text.split('\n').forEach(line => {
-      if (line.includes('/')) {
-        const folder = line.split('/')[1];
-        if (folder && folder.includes('-')) folders.add(folder);
-      }
+    const products = [];
+    const lines = text.split('\n').filter(line => line.endsWith('.ics'));
+
+    lines.forEach(line => {
+      const fullPath = line.trim();
+      const fileName = fullPath.split('/').pop();           // Iptv Vitalício.ics
+      const folderName = fileName.replace(/\.ics$/, '');     // Iptv Vitalício
+      const displayName = decodeURIComponent(folderName);
+
+      products.push({
+        name: displayName,
+        folder: folderName
+      });
     });
 
-    res.json(Array.from(folders));
+    res.json(products);
   } catch (e) {
+    console.error(e);
     res.json([]);
   }
 }
